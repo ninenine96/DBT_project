@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_customer_details
+    description: customer table from snowflake database
+    columns: 
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+  - name: stg_order_details
+    columns: 
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+  - name: stg_product_details
+    columns: 
+      - name: product_id
+        tests:
+          - unique
+          - not_null
