@@ -1,6 +1,16 @@
+with od as (
+    select * from {{ ref('stg_order_details') }}
+),
+
+ds as (
+    select * from {{ ref('stg_date_spine')}}
+)
+
 select 
-    date(order_date_time)
-from {{ ref('stg_order_details') }}
-right join {{ ref('date_spine')}}
-on date(stg_order_details.order_date_time) = date(date_spine.day_date)  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
+    date(order_date_time) as date_day,
+    order_id,
+    Discounted_amount as Order_amount
+from od
+right join ds
+on date(od.order_date_time) = date(ds.date_day)
+order by ds.date_day

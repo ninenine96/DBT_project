@@ -11,4 +11,3 @@ with order_details as (
     from {{ source('mr_tables', 'orders') }}
 )
 
-select * from order_details
