@@ -5,7 +5,7 @@ with order_details as (
         orderisdelivery as order_is_delivery,
         orderisdiscount as order_is_discount,
         orderamountincdiscount as Discounted_amount,
-        orderamountexcdiscount as Orignal_amount,
+        orderamountexcdiscount as Original_amount,
         productid as product_id,
         customerid as customer_id
     from {{ source('mr_tables', 'orders') }}
