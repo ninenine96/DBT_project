@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: mr_tables
+    database: pc_dbt_db
+    schema: dbt_mrohan
+    tables:
+        - name: orders
+        - name: products
+        - name: customers
