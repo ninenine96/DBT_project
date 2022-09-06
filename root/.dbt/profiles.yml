@@ -1,0 +1,24 @@
+PC_DBT_DB:
+    target: default
+    outputs:
+        default:
+            type: snowflake
+            account: PV16341.australia-east.azure
+
+            # User/password auth
+            user: MOHAMMADROHAN
+            password: Xxyme13;
+
+            role: PC_DBT_ROLE
+            database: PC_DBT_DB
+            warehouse: PC_DBT_WH
+            schema: dbt_MRohan
+            threads: 2
+            client_session_keep_alive: False
+            query_tag: CLI
+
+            # optional
+            connect_retries: 0 # default 0
+            connect_timeout: 10 # default: 10
+            retry_on_database_errors: False # default: false
+            retry_all: False # default: false

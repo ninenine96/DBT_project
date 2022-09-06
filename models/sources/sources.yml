@@ -1,10 +1,12 @@
 version: 2
 
 sources:
-  - name: mr_tables
-    database: pc_dbt_db
-    schema: dbt_mrohan
-    tables:
-        - name: orders
-        - name: products
-        - name: customers
+    - name: mr_tables
+      database: pc_dbt_db
+      schema: dbt_mrohan
+      tables:
+          - name: orders
+          - name: products
+          - name: customers
+          - name: DELTA_EMPLOYEE_59
+          - name: DELTA_EMPLOYEE_ALL

@@ -10,4 +10,4 @@ with order_details as (
         customerid as customer_id
     from {{ source('mr_tables', 'orders') }}
 )
-
+select * from order_details

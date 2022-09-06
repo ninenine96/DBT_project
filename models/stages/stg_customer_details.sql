@@ -1,3 +1,9 @@
+{# {{ config(
+        materialized = 'm_type',
+        prefix = 'TEST007'
+    ) 
+}} #}
+
 with customer_details as (
     select 
         customerid as customer_id,
@@ -8,5 +14,4 @@ with customer_details as (
         customermemberfrom as customer_membership_date
     from {{ source('mr_tables', 'customers') }}
 )
-
 select * from customer_details
