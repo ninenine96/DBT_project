@@ -1,3 +1,9 @@
+{{
+  config(
+    materialized = 'table',
+    )
+}}
+
 with customer_details as (
     select * from {{ ref('stg_customer_details') }}
 ),
