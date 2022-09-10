@@ -17,6 +17,8 @@
     -   Once DBT CLI is configured, run
     -   `dbt deps`
     -   to install any package dependencies for the dbt project.
+    -   to run the project inside docker cli
+    -   `docker run`
 
 -   For running the docker image, docker desktop is needed.
 

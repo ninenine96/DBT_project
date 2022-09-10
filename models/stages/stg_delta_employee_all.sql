@@ -1,4 +1,4 @@
-with delta_employees_all as (
+ with delta_employees_all as (
     select 
         emp_id,
         concat(first_name,' ',last_name) as name,
@@ -7,4 +7,4 @@ with delta_employees_all as (
     from {{source('mr_tables', 'DELTA_EMPLOYEE_ALL')}}
 )
 
-select * from delta_employees_all
+select * from delta_employees_all 

@@ -1,8 +1,4 @@
-{# {{ config(
-        materialized = 'm_type',
-        prefix = 'TEST007'
-    ) 
-}} #}
+
 
 with customer_details as (
     select 

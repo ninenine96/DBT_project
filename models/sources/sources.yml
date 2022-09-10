@@ -10,3 +10,5 @@ sources:
           - name: customers
           - name: DELTA_EMPLOYEE_59
           - name: DELTA_EMPLOYEE_ALL
+          - name: DELTA_EMPLOYEE_SOURCE
+          - name: DELTA_EMPLOYEE_NEW

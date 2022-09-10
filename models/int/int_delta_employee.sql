@@ -26,10 +26,6 @@ merge_tables as (
                 
                 
                 then 'Outdated Record'
-        
-            when source.emp_id != destination.emp_id 
-                then 'New Insertion'
-            
             else 'No Update'
         
         end as is_updated
