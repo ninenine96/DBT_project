@@ -15,7 +15,6 @@
 
     {%- call statement('main') -%}
         {{ build_sql }}
-        {# {{print(build_sql)}} #}
     {% endcall %}
     
     {% set target_relation = this.incorporate(type='table') %}

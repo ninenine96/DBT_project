@@ -9,6 +9,8 @@
 
     {%- set column_names = csv_columns.split(',') -%}
 
+    {#GIT WORK#}
+
     merge into {{ target_relation }} 
     using {{ temp_relation }}
     on (
