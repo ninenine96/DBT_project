@@ -6,6 +6,12 @@
     )
 }}
 
+{# {{
+  config(
+    materialized = 'table',
+    )
+}} #}
+
 with new as (
     select * from {{ source('mr_tables', 'DELTA_EMPLOYEE_NEW') }}
 )
