@@ -1,7 +1,5 @@
 
 {%- macro delta_apply_macro(target_relation,temp_relation,primary_key, timestamp_now) -%}
-    
-    {{ create_table_as(false, temp_relation, sql) }}
 
     {%- set columns = (adapter.get_columns_in_relation(temp_relation)) -%}
 
@@ -9,30 +7,39 @@
 
     {%- set column_names = csv_columns.split(',') -%}
 
-    {#GIT WORK#}
+    INSERT INTO {{ target_relation }}
+    select *
+    from {{ temp_relation }}  
+    where not exists(
+        SELECT {{ primary_key }} 
+        FROM {{ target_relation }} 
+        WHERE 
+        {%- for i in range(column_names | length - 1) %}
+              {{ target_relation }}.{{column_names[i]}} = {{ temp_relation }}.{{ column_names[i] }}
+              {% if not loop.last %}
+                AND 
+              {% endif %}
+        {% endfor %}
+    );
 
     merge into {{ target_relation }} 
     using {{ temp_relation }}
     on (
-        {% for col in column_names %}
-            {{target_relation}}.{{col}} = {{temp_relation}}.{{col}}
-            {% if not loop.last %}
-                and
-            {% endif %}
+        {%- for i in range(column_names | length - 3) %}
+              {{ target_relation }}.{{column_names[i]}} = {{ temp_relation }}.{{ column_names[i] }}
+              {% if not loop.last %}
+                AND 
+              {% endif %}
         {% endfor %}
     )
 
-    when matched then update set 
-        {%- for i in range(column_names | length) %}
-            {% if i < 5 %}
-              {{ target_relation }}.{{column_names[i]}} = {{ temp_relation }}.{{column_names[i]}}{{','}}
-            {% endif %}
-        {% endfor -%}
-        {{ target_relation }}.{{'"EXPIRY_DATE"'}} = cast({{ timestamp_now }} - interval '1 second' as timestamp_ltz)
+    when matched and {{ target_relation }}.RECORD_DATE < {{ temp_relation }}.RECORD_DATE
+        then update set 
+        {{ target_relation }}.{{'EXPIRY_DATE'}} = cast({{ timestamp_now }} + interval '-1 second' as datetime)
 
     
-    when not matched then insert 
-        values
+    when not matched
+        then insert values 
         (
         {%- for i in range(column_names | length) %} 
             {% if i < 4 %}
@@ -40,8 +47,8 @@
             {% endif %}
         {% endfor -%}
 
-        cast({{ timestamp_now }} as timestamp_ltz),
-        cast('12/31/9999 23:59:59' as timestamp_ltz)
+        cast({{ timestamp_now }} as datetime),
+        cast('12/31/9999 23:59:59' as datetime)
         );
         
 {%- endmacro -%}

@@ -11,6 +11,8 @@
         {%- set build_sql = delta_apply_macro(target_table,temp_table,primary_key, timestamp_now) %}
     {% else %}
         {%- set build_sql = create_table(target_rel,temp_table) %}
+        {%- set build_sql = delta_apply_macro(target_table,temp_table,primary_key, timestamp_now) %}
+
     {% endif %}
 
     {%- call statement('main') -%}

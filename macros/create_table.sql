@@ -10,6 +10,6 @@
   alter table {{target_rel}}
   add status nvarchar;
   update {{target_rel}}
-  set status ='inserted'
+  {# set status ='inserted' #}
 {%- endmacro -%}
 
